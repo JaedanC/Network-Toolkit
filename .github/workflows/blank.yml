@@ -5,10 +5,10 @@ name: CompileTools
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  # push:
+  #   branches: [ "main" ]
+  # pull_request:
+  #   branches: [ "main" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -34,8 +34,17 @@ jobs:
           fileName: 'pygui.windows.v1.90.6.1.zip'
           latest: true
           extract: true
-            
+      
+      - name: Set up Python
+        # This is the version of the action for setting up Python, not the Python version.
+        uses: actions/setup-python@v5
+        with:
+          # Semantic version range syntax or exact version of a Python version
+          python-version: '3.11'
+      
+      - name: Run Python compile.py
+        run: python compile.py ${{ fromJson(steps.<step-id>.outputs.downloaded_files)[0] }}
 
       # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      # - name: Run a one-line script
+        # run: echo Hello, world!
