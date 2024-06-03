@@ -28,6 +28,7 @@ jobs:
 
       # Downloads the latest pygui release
       - name: release-downloader
+        id: pygui_release
         uses: robinraju/release-downloader@v1.10
         with:
           repository: 'JaedanC/pygui'
@@ -43,7 +44,7 @@ jobs:
           python-version: '3.11'
       
       - name: Run Python compile.py
-        run: python compile.py ${{ fromJson(steps.<step-id>.outputs.downloaded_files)[0] }}
+        run: python compile.py ${{ fromJson(steps.pygui_release.outputs.downloaded_files)[0] }}
 
       # Runs a single command using the runners shell
       # - name: Run a one-line script
