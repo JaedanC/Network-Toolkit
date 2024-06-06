@@ -1,0 +1,7 @@
+.vscode
+__pycache__
+venv
+bin
+downloads
+
+requirements_gen.txt
