@@ -17,7 +17,7 @@ def create_file_if_not_exist(path, contents=""):
 
 def main():
     if len(sys.argv) < 2:
-        print("No args supplied")
+        print("Usage: python compile.py [-d] | [pygui_directory]")
         return
     
     if "-d" in sys.argv:
@@ -59,7 +59,7 @@ def main():
     meraki_app_dir          = os.path.join("tools", "Meraki-App")
     ping_app_dir            = os.path.join("tools", "Ping-App")
     loud_ping_dir           = os.path.join("tools", "LoudPing")
-    multi_ping_dir           = os.path.join("tools", "MultiPing")
+    multi_ping_dir          = os.path.join("tools", "MultiPing")
 
     all_app_dirs = [
         catalyst_switch_app_dir,
