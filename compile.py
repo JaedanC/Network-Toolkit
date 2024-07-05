@@ -161,6 +161,11 @@ def main():
         "exe": "app.exe",
         "dir": "Ping-App",
         "bat": "pping.bat",
+    },
+    {
+        "exe": "app.exe",
+        "dir": "Catalyst-Switch-App",
+        "bat": "capp.bat",
     }]
 
     for bin_detail in bin_details:

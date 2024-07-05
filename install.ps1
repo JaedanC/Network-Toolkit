@@ -8,6 +8,13 @@ git submodule update --recursive
 
 cd tools
 
+cd Catalyst-Switch-App
+python -m venv venv
+./venv/Scripts/activate
+pip install -q -r requirements.txt
+python setup.py
+cd ..
+
 cd LoudPing
 python -m venv venv
 ./venv/Scripts/activate
