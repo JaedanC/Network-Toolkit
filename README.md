@@ -25,5 +25,6 @@ Open powershell to the root folder of the project and run:
 
 ## Extra notes
 
-- Some GUI apps require you to position the windows for the first time.
+- GUI apps require you to position the windows for the first time.
 - For the Meraki-App you can supply a `meraki_api_key.txt` which will make running the app easier.
+- For the Catalyst-Switch-App you can supply a `password.txt` which will make running the app easier.
