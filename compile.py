@@ -17,7 +17,7 @@ def create_file_if_not_exist(path, contents=""):
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: python compile.py [-d] | [pygui_directory]")
+        print("Usage: python compile.py ([-d] | [pygui_directory]) [-exe] ")
         return
 
     if "-d" in sys.argv:
@@ -76,9 +76,13 @@ def main():
     ]
 
     # Copy pygui
-    for pygui_app_dir in pygui_app_dirs:
-        shutil.copytree(pygui_folder, os.path.join(pygui_app_dir, "pygui"), dirs_exist_ok=True)
-        shutil.copy(pygui_demo, pygui_app_dir)
+    try:
+        for pygui_app_dir in pygui_app_dirs:
+            shutil.copytree(pygui_folder, os.path.join(pygui_app_dir, "pygui"), dirs_exist_ok=True)
+            shutil.copy(pygui_demo, pygui_app_dir)
+    except shutil.Error as e:
+        print("Could not copy pygui binaries")
+        print(e)
 
     # Initialise any other files
     example_switches_json = {
@@ -129,15 +133,6 @@ def main():
     if not os.path.exists("bin"):
         os.mkdir("bin")
 
-    bat_src = \
-    textwrap.dedent("""
-    @echo off
-
-    setlocal
-    cd "{working_dir}"
-    {exe_name} %*
-    endlocal
-    """).strip()
 
     base_absolute = os.path.dirname(os.path.realpath(__file__))
     binary_dir = os.path.join(base_absolute, "bin")
@@ -146,34 +141,73 @@ def main():
         "exe": "mping.exe",
         "dir": "MultiPing",
         "bat": "mping.bat",
+        "py":  "mping.py",
     },
     {
         "exe": "lping.exe",
         "dir": "LoudPing",
         "bat": "lping.bat",
+        "py":  "lping.py",
     },
     {
         "exe": "app.exe",
         "dir": "Meraki-App",
         "bat": "mapp.bat",
+        "py":  "app.py",
     },
     {
         "exe": "app.exe",
         "dir": "Ping-App",
         "bat": "pping.bat",
+        "py":  "app.py",
     },
     {
         "exe": "app.exe",
         "dir": "Catalyst-Switch-App",
         "bat": "capp.bat",
+        "py":  "app.py",
     }]
 
-    for bin_detail in bin_details:
-        with open(os.path.join(binary_dir, bin_detail["bat"]), "w", encoding="utf-8") as f:
-            f.write(bat_src.format(
-                working_dir=os.path.join(base_absolute, "tools", bin_detail["dir"], "dist"),
-                exe_name=bin_detail["exe"]
-            ))
+    if "-exe" in sys.argv:
+        bat_src = \
+        textwrap.dedent("""
+        @echo off
+
+        setlocal
+        cd "{working_dir}"
+        {exe_name} %*
+        endlocal
+        """).strip()
+
+        for bin_detail in bin_details:
+            creating_file = os.path.join(binary_dir, bin_detail["bat"])
+            print("Creating", creating_file)
+            with open(creating_file, "w", encoding="utf-8") as f:
+                f.write(bat_src.format(
+                    working_dir=os.path.join(base_absolute, "tools", bin_detail["dir"], "dist"),
+                    exe_name=bin_detail["exe"]
+                ))
+    else:
+        bat_src = \
+        textwrap.dedent("""
+        @echo off
+
+        setlocal
+        cd "{working_dir}"
+        powershell -Command "./venv/scripts/activate;"^
+         "python {starting_file} %*"
+        @REM exit
+        endlocal
+        """).strip()
+
+        for bin_detail in bin_details:
+            creating_file = os.path.join(binary_dir, bin_detail["bat"])
+            print("Creating", creating_file)
+            with open(creating_file, "w", encoding="utf-8") as f:
+                f.write(bat_src.format(
+                    working_dir=os.path.join(base_absolute, "tools", bin_detail["dir"]),
+                    starting_file=bin_detail["py"]
+                ))
 
 
 if __name__ == "__main__":
