@@ -1,3 +1,5 @@
+git submodule update --recursive
+
 python -m venv venv 2>$null
 ./venv/Scripts/activate
 python -m pip install --upgrade pip
@@ -5,7 +7,6 @@ pip install -q -r requirements.txt
 python compile.py -d
 
 pip install -q -r requirements_gen.txt
-git submodule update --recursive
 
 cd tools
 
