@@ -4,7 +4,7 @@ python -m venv venv 2>$null
 ./venv/Scripts/activate
 python -m pip install --upgrade pip
 pip install -q -r requirements.txt
-python compile.py -d -exe
+python compile.py -exe
 
 pip install -q -r requirements_gen.txt
 pip install py2exe
