@@ -29,6 +29,10 @@ You can opt to install using py2exe, but note this is not supported for Python 1
 ./install_py2exe.ps1
 ```
 
+## Pygui Ping
+
+![Screenshot](https://raw.githubusercontent.com/JaedanC/Network-Toolkit/refs/heads/main/media/PingAppScreenshot.png)
+
 ## Extra notes
 
 - GUI apps require you to position the windows for the first time.
