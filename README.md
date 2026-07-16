@@ -14,7 +14,7 @@ winget install --id Git.Git -e --source winget
 Download this repository with:
 
 ```bash
-git clone git@github.com:JaedanC/Network-Toolkit.git --recursive
+git clone --recursive git@github.com:JaedanC/Network-Toolkit.git
 ```
 
 Open powershell to the root folder of the project and run:
