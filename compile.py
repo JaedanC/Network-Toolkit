@@ -16,45 +16,6 @@ def create_file_if_not_exist(path, contents=""):
 
 
 def main():
-    if len(sys.argv) < 2:
-        print("Usage: python compile.py ([-d] | [pygui_directory]) [-exe] ")
-        return
-
-    if "-d" in sys.argv:
-        # https://docs.github.com/en/rest/releases/releases
-        print("Querying Github API for latest pygui release")
-        res = APIRequest("https://api.github.com/repos/JaedanC/pygui/releases/latest") \
-            .set_method(Method.Get) \
-            .execute()
-
-        asset = res.json_dict()["assets"][0]
-        filename: str = asset["name"]
-        download_url: str = asset["browser_download_url"]
-
-        print(f"Downloading {filename}")
-        raw_res = APIRequest(download_url) \
-            .set_method(Method.Get) \
-            .execute() \
-            .raw()
-
-        zip_name = "downloads/" + filename
-        folder_name = zip_name.removesuffix(".zip")
-
-        with safe_open_wb(zip_name) as f:
-            f.write(raw_res.content)
-
-        print(f"Unzipping to {folder_name}")
-        with zipfile.ZipFile(zip_name) as zip_f:
-            zip_f.extractall(folder_name)
-
-        pygui_release_dir = folder_name
-        print(pygui_release_dir)
-    else:
-        pygui_release_dir = sys.argv[1]
-
-    pygui_folder = os.path.join(pygui_release_dir, "pygui")
-    pygui_demo = os.path.join(pygui_release_dir, "pygui_demo.py")
-
     catalyst_switch_app_dir = os.path.join("tools", "Catalyst-Switch-App")
     meraki_app_dir          = os.path.join("tools", "Meraki-App")
     ping_app_dir            = os.path.join("tools", "Ping-App")
@@ -68,21 +29,6 @@ def main():
         loud_ping_dir,
         multi_ping_dir,
     ]
-
-    pygui_app_dirs = [
-        catalyst_switch_app_dir,
-        meraki_app_dir,
-        ping_app_dir,
-    ]
-
-    # Copy pygui
-    try:
-        for pygui_app_dir in pygui_app_dirs:
-            shutil.copytree(pygui_folder, os.path.join(pygui_app_dir, "pygui"), dirs_exist_ok=True)
-            shutil.copy(pygui_demo, pygui_app_dir)
-    except shutil.Error as e:
-        print("Could not copy pygui binaries")
-        print(e)
 
     # Initialise any other files
     example_switches_json = {
@@ -103,9 +49,7 @@ def main():
         "switches = " + json.dumps(example_switches_json, indent=4)
     )
     create_file_if_not_exist(os.path.join(catalyst_switch_app_dir, "password.txt"))
-
     create_file_if_not_exist(os.path.join(meraki_app_dir, "meraki_api_key.txt"))
-
 
     requirements_files = [os.path.join(app_dir, "requirements.txt") for app_dir in all_app_dirs]
     dependencies = []
