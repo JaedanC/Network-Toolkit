@@ -13,3 +13,6 @@
 [submodule "extra"]
 	path = extra
 	url = git@github.com:JaedanC/GenericAPI.git
+[submodule "tools/Catalyst-Switch-App"]
+	path = tools/Catalyst-Switch-App
+	url = https://github.com/JaedanC/Catalyst-Switch-App.git
