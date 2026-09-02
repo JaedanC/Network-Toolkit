@@ -14,7 +14,7 @@ winget install --id Git.Git -e --source winget
 Download this repository with:
 
 ```bash
-git clone git@github.com:JaedanC/Network-Toolkit.git --recursive
+git clone --recursive git@github.com:JaedanC/Network-Toolkit.git
 ```
 
 Open powershell to the root folder of the project and run:
@@ -28,6 +28,10 @@ You can opt to install using py2exe, but note this is not supported for Python 1
 ```bash
 ./install_py2exe.ps1
 ```
+
+## Pygui Ping
+
+![Screenshot](https://raw.githubusercontent.com/JaedanC/Network-Toolkit/refs/heads/main/media/PingAppScreenshot.png)
 
 ## Extra notes
 

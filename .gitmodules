@@ -10,9 +10,9 @@
 [submodule "tools/LoudPing"]
 	path = tools/LoudPing
 	url = git@github.com:JaedanC/LoudPing.git
-[submodule "tools/Catalyst-Switch-App"]
-	path = tools/Catalyst-Switch-App
-	url = git@github.com:JaedanC/Catalyst-Switch-App.git
 [submodule "extra"]
 	path = extra
 	url = git@github.com:JaedanC/GenericAPI.git
+[submodule "tools/Catalyst-Switch-App"]
+	path = tools/Catalyst-Switch-App
+	url = https://github.com/JaedanC/Catalyst-Switch-App.git
