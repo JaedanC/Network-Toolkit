@@ -1,10 +1,7 @@
 import sys
 import os
-import shutil
 import json
 import textwrap
-import zipfile
-from extra.api import APIRequest, Method, safe_open_wb
 
 
 def create_file_if_not_exist(path, contents=""):
@@ -86,30 +83,35 @@ def main():
         "dir": "MultiPing",
         "bat": "mping.bat",
         "py":  "mping.py",
+        "wd":  ".",
     },
     {
         "exe": "lping.exe",
         "dir": "LoudPing",
         "bat": "lping.bat",
         "py":  "lping.py",
+        "wd":  ".",
     },
     {
         "exe": "app.exe",
         "dir": "Meraki-App",
         "bat": "mapp.bat",
         "py":  "app.py",
+        "wd":  ".",
     },
     {
         "exe": "app.exe",
         "dir": "Ping-App",
         "bat": "pping.bat",
         "py":  "app.py",
+        "wd":  "app",
     },
     {
         "exe": "app.exe",
         "dir": "Catalyst-Switch-App",
         "bat": "capp.bat",
         "py":  "app.py",
+        "wd":  ".",
     }]
 
     if "-exe" in sys.argv:
@@ -125,10 +127,11 @@ def main():
 
         for bin_detail in bin_details:
             creating_file = os.path.join(binary_dir, bin_detail["bat"])
+            working_dir = bin_detail["wd"]
             print("Creating", creating_file)
             with open(creating_file, "w", encoding="utf-8") as f:
                 f.write(bat_src.format(
-                    working_dir=os.path.join(base_absolute, "tools", bin_detail["dir"], "dist"),
+                    working_dir=os.path.join(base_absolute, "tools", bin_detail["dir"], "dist", working_dir),
                     exe_name=bin_detail["exe"]
                 ))
     else:
