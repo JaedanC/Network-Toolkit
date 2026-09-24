@@ -108,6 +108,13 @@ def main():
     },
     {
         "exe": "app.exe",
+        "dir": "Meraki-App2.0",
+        "bat": "mmapp2.bat",
+        "py":  "app.py",
+        "wd":  "app",
+    },
+    {
+        "exe": "app.exe",
         "dir": "Catalyst-Switch-App",
         "bat": "capp.bat",
         "py":  "app.py",

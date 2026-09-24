@@ -16,3 +16,6 @@
 [submodule "tools/Catalyst-Switch-App"]
 	path = tools/Catalyst-Switch-App
 	url = https://github.com/JaedanC/Catalyst-Switch-App.git
+[submodule "tools/MerakiApp2.0"]
+	path = tools/MerakiApp2.0
+	url = https://github.com/JaedanC/MerakiApp2.0.git

@@ -17,6 +17,13 @@ python -m pip install --upgrade pip
 pip install -q -r requirements.txt
 cd ..
 
+cd MerakiApp2.0
+python -m venv venv
+./venv/Scripts/activate
+python -m pip install --upgrade pip
+pip install -q -r requirements.txt
+cd ..
+
 cd LoudPing
 python -m venv venv
 ./venv/Scripts/activate
