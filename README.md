@@ -54,3 +54,8 @@ Start in:
 ```txt
 ...Network-Toolkit\bin
 ```
+
+## Notes
+
+https://icons8.com/icons
+https://cloudconvert.com/png-to-ico
